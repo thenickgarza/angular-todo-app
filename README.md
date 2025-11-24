@@ -37,4 +37,14 @@ When deleting a todo we will need to:
 2. Add the deleteToDo. Now with this we will need to filter out the existing from the id. (delete)
 
 
+## Updating a todo.
+
+When updating a todo, I wanted a button that had Edit. When clicked that values of the title and description needed to be displayed inside the input boxes. 
+
+To do this we use the editTodo function to get to set the signals values to the todo we are wanting to edit. We then use 2way binding via `[value]="editTodoTitle()` and `(input)="editTodoTitle.set($event.target.value)"` to set the value and also get the new user input. 
+
+We then needed to create a smart button for saving which knows if we are editing a todo or adding a new one. To do this we used the value of editToDoId because we know if this is true then we can be certain the edit button was clicked as the oringal singal value was set to null (falsey).
+
+We can now use the values of the signals to supply either our update or add to do so as needed. 
+
 # angular-todo-app

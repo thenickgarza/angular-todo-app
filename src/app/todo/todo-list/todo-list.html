@@ -6,6 +6,7 @@
             <h3 class="text-lg font-bold">{{ todo.title }}</h3>
             <p class="text-sm text-gray-500">{{ todo.description }}</p>
             <p class="text-sm text-gray-500">{{ todo.createdAt }}</p>
+            <button class="bg-red-500 text-white rounded-md p-2 w-1/4 my-2" (click)="editTodo(todo.id, todo.title, todo.description)">Edit</button>
             <button class="bg-red-500 text-white rounded-md p-2 w-1/4 my-2" (click)="deleteTodo(todo.id)">Delete</button>
             <p class="text-sm text-gray-500 text-end">Completed: {{ todo.completed }}</p>
         </div>
@@ -14,10 +15,12 @@
     <div class="flex flex-col">
         <h1 class="text 2xl font-bold mb-3 text-center">Add Todo</h1>
         <!-- // the # is how the value is bound to the input. -->
-        <input class="border border-gray-300 rounded-md p-2 mb-2 w-full" type="text" #title placeholder="Title" />
-        <input class="border border-gray-300 rounded-md p-2 mb-2 w-full" type="text" #description placeholder="Description" />
+        <input class="border border-gray-300 rounded-md p-2 mb-2 w-full" type="text" #title [value]="editTodoTitle()" (input)="editTodoTitle.set($event.target.value)" placeholder="Title" />
+        <input class="border border-gray-300 rounded-md p-2 mb-2 w-full" type="text" #description [value]="editTodoDescription()" (input)="editTodoDescription.set($event.target.value)" placeholder="Description" />
         <!-- // Nick notice how we are using the value of the input to add the todo. Also note the (click) -->
-        <button class="bg-blue-500 text-white rounded-md p-2 w-full" (click)="addTodo(title.value, description.value)">Add</button>
+        <button class="bg-blue-500 text-white rounded-md p-2 w-full" (click)="saveTodo()">
+            {{ editTodoId() ? 'Update' : 'Add' }}
+          </button>
     </div>
 </div>
 <!-- test comment -->

@@ -19,6 +19,11 @@ export class TodoList {
     },
   ]);
 
+  // These are like state in react. They are used to store the values of the input fields.
+  editTodoId = signal<string | null>(null);
+  editTodoTitle = signal<string>('');
+  editTodoDescription = signal<string>('');
+
   addTodo(title: string, description: string) {
    // Since this is a signal, we need to update the signal using update method. 
     this.todos.update((todos) => {
@@ -40,5 +45,37 @@ export class TodoList {
    this.todos.update((todos) => {
     return todos.filter((todo) => todo.id !== id)
    })
+  }
+
+  // No parameters are supplied to the saveTodo function. 
+  // This is because we are using the signals to store the values of the input fields.
+  saveTodo() {
+    if (this.editTodoId()) {
+      this.updateTodo(
+        this.editTodoId()!,
+        this.editTodoTitle(),
+        this.editTodoDescription()
+      );
+    } else {
+      this.addTodo(
+        this.editTodoTitle(),
+        this.editTodoDescription()
+      );
+    }
+    this.editTodoId.set(null);
+    this.editTodoTitle.set('');
+    this.editTodoDescription.set('');
+  }
+
+  editTodo(id: string, title:string, description: string) {
+    this.editTodoId.set(id);
+    this.editTodoTitle.set(title);
+    this.editTodoDescription.set(description);
+  }
+
+  updateTodo(id: string, title: string, description: string) {
+    this.todos.update((todos) => {
+      return todos.map((todo) => todo.id === id ? {...todo, title: title, description: description} : todo)
+    })
   }
 }
