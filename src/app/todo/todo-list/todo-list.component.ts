@@ -7,6 +7,7 @@ import { Todo } from '../todo.model';
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.css',
 })
+
 export class TodoList {
   todos = signal<Todo[]>([
     {
@@ -22,7 +23,7 @@ export class TodoList {
    // Since this is a signal, we need to update the signal using update method. 
     this.todos.update((todos) => {
       return [
-        // ...todos is the spread operator to add the existing todos to the new array. 
+        // ...todos is the spread operator to add the existing todos to the new array.
         ...todos,
         {
           id: `${todos.length + 1}`,
@@ -33,5 +34,11 @@ export class TodoList {
         },
       ];
     });
+  }
+
+  deleteTodo(id:string) {
+   this.todos.update((todos) => {
+    return todos.filter((todo) => todo.id !== id)
+   })
   }
 }

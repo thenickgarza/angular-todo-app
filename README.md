@@ -20,6 +20,21 @@ Dont forget to edit the routes file to include the new component page to render.
 
 Another important thing to remmeber is to ensure the `<router-outlet></router-outlet>` is placed in the app.html or else nothing will render. 
 
+## Adding a Todo
+
+When adding a todo we will need to: 
+
+1. create input fields for user to submit a todo including a button
+2. create the addTodo in the component class with the params being the user input values
+3. Look in html notes to see how we can grab these values with `#`
+4. Important to use the spread operator when handling a update
+
+## Deleting a Todo
+
+When deleting a todo we will need to:
+
+1. create a button which when clicked supplies the value of the todo. This can be done by simply adding a button to the already created loop. ID can be accessed since we are already looping through the values. We just need to handle what does what. 
+2. Add the deleteToDo. Now with this we will need to filter out the existing from the id. (delete)
 
 
 # angular-todo-app
