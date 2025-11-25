@@ -9,7 +9,7 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  private baseUrl = "https://api.github.com/search/users?q="
+  private baseUrl = "https://dummyjson.com/users/search?q="
 
   getData(query:string) {
     const url = `${this.baseUrl}${query}`

@@ -1,7 +1,6 @@
 <h1 class="text-center text-2xl font-bold mb-5">Github User Search</h1>
 <div class="flex flex-row items-center justify-center gap-10">
-    <input class="border border-gray-300 rounded-md p-2 mb-2 w-1/2" type="text" #query placeholder="Enter query" />
-    <button class="bg-blue-500 text-white rounded-md p-2 w-1/4" (click)="getData(query.value)">Get Data</button>
+    <input class="border border-gray-300 rounded-md p-2 mb-2 w-1/2" [formControl]="searchControl" type="text" #query placeholder="Enter query" />
 </div>
 
 <table class="w-full max-w-4xl mx-auto border-collapse">
@@ -14,7 +13,7 @@
     <tbody>
         @for (user of users; track user.id) {
             <tr class="border-b border-gray-300 hover:bg-gray-50">
-                <td class="p-3">{{ user.login }}</td>
+                <td class="p-3">{{ user.firstName }}</td>
                 <td class="p-3">
                     <a [href]="user.html_url" target="_blank" class="text-blue-500 hover:underline">
                         {{ user.html_url }}
