@@ -11,6 +11,9 @@
 npm-debug.log
 yarn-error.log
 
+# API keys
+src/api-keys.json
+
 # IDEs and editors
 .idea/
 .project
