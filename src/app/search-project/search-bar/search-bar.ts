@@ -11,9 +11,12 @@ import { SearchService } from '../search-service';
 export class SearchBar {
   constructor(private searchService: SearchService) { }
 
+  users: any[] = [];
+
   getData(query:string) {
     return this.searchService.getData(query).subscribe((data) => {
-      console.log(data);
+      this.users = data.items;
+      console.log(data.items);
     })
   }
 
