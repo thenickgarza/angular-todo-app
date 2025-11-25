@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { WeatherService } from './weather-service.service';
 import { switchMap } from 'rxjs';
 
@@ -9,11 +9,16 @@ import { switchMap } from 'rxjs';
   styleUrl: './weather-dashboard.css',
 })
 export class WeatherDashboard {
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService, private cdr: ChangeDetectorRef) {}
+
+  weatherData: any = null
 
   getWeather(city: string) {
     this.getGeoLocation(city).subscribe((data) => {
-      console.log(data);
+      this.weatherData = data;
+      // Need to add this to ensure the changes are detected. For some reason the template does not render
+      // with the data without this from api call without this. Will need to click the button twice to get the data to render.
+      this.cdr.detectChanges();
     });
   }
 

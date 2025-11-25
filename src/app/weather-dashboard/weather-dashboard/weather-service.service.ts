@@ -17,7 +17,7 @@ export class WeatherService {
   
   getGeoLocation(city:string) {
     const url = `${this.apiGeoUrl}?q=${city}&limit=5&appid=${this.apiKey}`
-    return this.http.get<any[]>(url);
+    return this.http.get<any>(url);
   }
 
   getWeather(lat:string, lon:string) {
