@@ -8,6 +8,8 @@ import { switchMap } from 'rxjs';
   templateUrl: './weather-dashboard.html',
   styleUrl: './weather-dashboard.css',
 })
+
+
 export class WeatherDashboard {
   constructor(private weatherService: WeatherService, private cdr: ChangeDetectorRef) {}
 
