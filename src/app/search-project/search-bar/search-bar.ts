@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SearchService } from '../search-service';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap, filter, catchError} from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-search-bar',
@@ -24,13 +26,18 @@ export class SearchBar {
   }
 
   ngOnInit() {
-    this.searchControl.valueChanges.subscribe((value) => {
-      if (value) {
-        this.searchService.getData(value).subscribe(data => {
-          console.log(data.users);
-          this.users = data.users;
-        })
-    }
-  });
+    this.searchControl.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      filter(query => query ? query.length >= 2 : false),
+      switchMap(query => this.searchService.getData(query as string)),
+      catchError(error => {
+        console.log('Error:', error)
+        return of({ items: []})
+      })
+    ).subscribe(data => {
+      console.log(data);
+      this.users = data.results
+    })
   }
 }

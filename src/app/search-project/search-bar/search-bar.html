@@ -13,12 +13,7 @@
     <tbody>
         @for (user of users; track user.id) {
             <tr class="border-b border-gray-300 hover:bg-gray-50">
-                <td class="p-3">{{ user.firstName }}</td>
-                <td class="p-3">
-                    <a [href]="user.html_url" target="_blank" class="text-blue-500 hover:underline">
-                        {{ user.html_url }}
-                    </a>
-                </td>
+                <td class="p-3">{{ user.name }}</td>
             </tr>
         }
     </tbody>
