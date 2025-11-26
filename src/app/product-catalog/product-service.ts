@@ -97,6 +97,17 @@ export class ProductService {
     return this.products;
   }
 
+  getSingleProduct(id: number): Product | undefined {
+    const product = this.products.find((p) => p.id === id);
+
+    if (!product) {
+      console.log("no product found with id:", id)
+      return
+    } else {
+      return product
+    }
+  }
+
   getCartItems(): Observable<CartItem[]> {
     return this.cart$
   }
