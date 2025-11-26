@@ -3,6 +3,8 @@ import { TodoList } from './todo/todo-list/todo-list.component';
 import { WeatherDashboard } from './weather-dashboard/weather-dashboard/weather-dashboard.component';
 import { SearchBar } from './search-project/search-bar/search-bar';
 import { RegistrationForm } from './user-registration/registration-form/registration-form.component';
+import { ProductList } from './product-catalog/product-list/product-list.component';
+import { ProductDetail } from './product-catalog/product-detail/product-detail/product-detail';
 
 export const routes: Routes = [
     {
@@ -20,5 +22,13 @@ export const routes: Routes = [
     {
         path: 'registration',
         component: RegistrationForm
+    },
+    {
+        path: 'products',
+        component: ProductList
+    },
+    {
+        path: 'products/:id',
+        component: ProductDetail
     }
 ];

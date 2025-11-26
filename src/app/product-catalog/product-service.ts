@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ProductService {
   // only the service can call .next() to update the the cart
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
