@@ -2,8 +2,9 @@
     <div class="flex gap-2 w-96">
         <label class="border border-gray-300 rounded-md p-2 w-1/4" for="username">Username</label>
         <input formControlName="username" class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="username">
+    </div>
         @if (registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched) {
-            <div class="text-red-500 text-sm ml-28">
+            <div class="flex text-red-500 text-sm w-1/4 ml-28">
               @if (registrationForm.get('username')?.errors?.['required']) {
                 <p>Username is required</p>
               }
@@ -12,7 +13,6 @@
               }
             </div>
           }
-    </div>
     <div class="flex gap-2 w-96">
         <label class="border border-gray-300 rounded-md p-2 w-1/4" for="email">Email</label>
         <input formControlName="email" class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="email">
