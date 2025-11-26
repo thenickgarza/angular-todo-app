@@ -1,14 +1,27 @@
-<form class="flex flex-col items-center h-screen justify-center gap-4 w-full">
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center h-screen justify-center gap-4 w-full">
     <div class="flex gap-2 w-96">
         <label class="border border-gray-300 rounded-md p-2 w-1/4" for="username">Username</label>
-        <input class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="username">
+        <input formControlName="username" class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="username">
+        @if (registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched) {
+            <div class="text-red-500 text-sm ml-28">
+              @if (registrationForm.get('username')?.errors?.['required']) {
+                <p>Username is required</p>
+              }
+              @if (registrationForm.get('username')?.errors?.['minlength']) {
+                <p>Username must be at least 3 characters</p>
+              }
+            </div>
+          }
     </div>
     <div class="flex gap-2 w-96">
         <label class="border border-gray-300 rounded-md p-2 w-1/4" for="email">Email</label>
-        <input class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="email">
+        <input formControlName="email" class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="email">
     </div>
     <div class="flex gap-2 w-96">
         <label class="border border-gray-300 rounded-md p-2 w-1/4" for="password">Password</label>
-        <input class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="password">
+        <input formControlName="password" class="border border-gray-300 rounded-md p-2 w-1/2" type="text" id="password">
     </div>
+
+    <button type="submit" [disabled]="registrationForm.invalid" class="bg-blue-500 text-white rounded-md p-2 w-1/2 disabled:opacity-50 disabled:cursor-not-allowed">Register</button>
+
 </form>

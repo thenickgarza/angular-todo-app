@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 
 @Component({
   selector: 'app-registration-form',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './registration-form.html',
   styleUrl: './registration-form.css',
 })
@@ -24,5 +24,16 @@ export class RegistrationForm {
       Validators.minLength(6)
     ])
   })
+
+  ngOnInit() {
+    this.registrationForm.valueChanges.subscribe((value) => {
+      console.log("Form value:", value);
+      console.log("Form Valid:", this.registrationForm.valid);
+    })
+  }
+  
+  onSubmit() {
+    console.log("Form submitted:", this.registrationForm.value);
+  }
 
 }
