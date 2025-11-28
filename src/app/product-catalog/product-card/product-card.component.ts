@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './product-card.html',
   styleUrl: './product-card.css',
 })
+
 export class ProductCard {
 
   @Input() product!: Product;
