@@ -6,6 +6,7 @@
             <div class="border p-4 mb-2">
             <h2>{{item.product.name }}</h2>
             <p>{{item.product.description }}</p>
+            <p>Quantity: {{item.quantity}}</p>
             <button class="bg-red-500 mt-2 text-white py-2 px-2" (click)="removeItem(item.product.id)">Remove Item</button>
             </div>
         }

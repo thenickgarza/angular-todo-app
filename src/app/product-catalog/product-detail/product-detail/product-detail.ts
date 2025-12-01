@@ -16,12 +16,20 @@ export class ProductDetail implements OnInit{
 
   constructor(private productService: ProductService, private route: ActivatedRoute) {}
 
+  addToCart() {
+    if (this.product) {
+      this.productService.addToCart(this.product.id)
+    }
+  }
+
   ngOnInit() {
     const productId = this.route.snapshot.paramMap.get('id');
 
     if (productId) {
       this.product = this.productService.getSingleProduct(Number(productId))
     }
+
   }
   
 }
+
