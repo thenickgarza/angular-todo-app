@@ -6,6 +6,7 @@ import { RegistrationForm } from './user-registration/registration-form/registra
 import { ProductList } from './product-catalog/product-list/product-list.component';
 import { ProductDetail } from './product-catalog/product-detail/product-detail/product-detail';
 import { ShoppingCart } from './product-catalog/shopping-cart/shopping-cart';
+import { ProductSearch } from './product-catalog/product-search/product-search';
 
 export const routes: Routes = [
     {
@@ -35,5 +36,9 @@ export const routes: Routes = [
     {
         path: 'cart',
         component: ShoppingCart
+    },
+    {
+        path: 'product-search',
+        component: ProductSearch
     }
 ];
