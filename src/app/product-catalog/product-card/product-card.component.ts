@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../product.model';
 import { RouterLink } from '@angular/router';
+import { ProductService } from '../product-service';
 
 
 @Component({
@@ -13,5 +14,13 @@ import { RouterLink } from '@angular/router';
 export class ProductCard {
 
   @Input() product!: Product;
+
+  constructor(private productService: ProductService) {}
+
+  addToCart(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.productService.addToCart(this.product.id)
+  }
 
 }
