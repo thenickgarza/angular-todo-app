@@ -1,5 +1,20 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+
+
+const passwordMatchValidator = (form: AbstractControl) => {
+  const password = form.get('password');
+  const confirmPassword = form.get('confirmPassword');
+
+  if (!password || !confirmPassword) {
+    return null;
+  }
+
+  if (password.value !== confirmPassword.value) {
+    return { passwordMismatch: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-registration-form',
@@ -7,6 +22,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
   templateUrl: './registration-form.html',
   styleUrl: './registration-form.css',
 })
+
 
 export class RegistrationForm {
 
@@ -22,8 +38,13 @@ export class RegistrationForm {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6)
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
     ])
-  })
+  }, { validators: passwordMatchValidator });
+
 
   ngOnInit() {
     this.registrationForm.valueChanges.subscribe((value) => {
@@ -34,6 +55,8 @@ export class RegistrationForm {
   
   onSubmit() {
     console.log("Form submitted:", this.registrationForm.value);
+    localStorage.setItem('user', JSON.stringify(this.registrationForm.value));
+    console.log("User saved:", localStorage.getItem('user'));
   }
 
 }
