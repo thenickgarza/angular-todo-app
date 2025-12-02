@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap, filter, catchError} from 'rxjs/operators';
-import { of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
 import { ProductService } from '../product-service';
 import { Product } from '../product.model';
 
@@ -15,28 +14,24 @@ export class ProductSearch {
 
 searchControl = new FormControl('');
 products: Product[] = [];
-
-constructor(private productService: ProductService) {}
+constructor(private productService: ProductService, private cd: ChangeDetectorRef) {}
 
 getProducts(){
-  this.products = this.productService.getProducts();
+  return this.productService.getProducts();
 }
-
-
 
 ngOnInit() {
   this.searchControl.valueChanges.pipe(
-    debounceTime(300),
-    distinctUntilChanged(),
-    filter(query => query ? query.length >= 2 : false),
-    switchMap(query => this.productService.getProducts()),
-    catchError(error => {
-      console.log('Error:', error)
-      return of({ products: []})
-    })
-  ).subscribe(data => {
-    console.log(data);
-    // this.products = data.;
+    debounceTime(100),
+  ).subscribe(query => {
+    if (query){
+      this.products = this.getProducts().filter(product => product.name.toLowerCase().includes(query!.toLowerCase()));
+    }
+    else {
+      this.products = [];
+    }
+    console.log(this.products);
+    this.cd.detectChanges();
   })
 }
 

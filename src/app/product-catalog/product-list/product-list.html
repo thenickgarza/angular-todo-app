@@ -1,4 +1,4 @@
-<div class="flex flex-row gap-10 h-screen items-center justify-center">
+<div id="product-list">
 @for (product of products; track product.id) {
     <app-product-card [product]="product" />
 }

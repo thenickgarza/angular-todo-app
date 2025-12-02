@@ -1,3 +1,13 @@
 <div class="flex flex-row items-center justify-center gap-10">
     <input class="border border-gray-300 rounded-md p-2 mb-2 w-1/2" [formControl]="searchControl" type="text" #query placeholder="Enter query" />
 </div>
+
+<div class="flex flex-row flex-wrap gap-4">
+    @for (product of products; track product.id) {
+        <div class="border border-gray-300 rounded-md p-2">
+            <h2 class="font-bold">{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p>{{ product.price }}</p>
+        </div>
+    }
+</div>
